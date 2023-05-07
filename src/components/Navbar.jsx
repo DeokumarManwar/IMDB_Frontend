@@ -193,7 +193,7 @@ export const Navbar = ({ setType, setInputValue, inputValue }) => {
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.15, x: 2 }}
-                onClick={loginHandler}
+                onClick={signupHandler}
                 className={`max-md:hidden text-xl bg-gray-800 formNavigator hover:bg-[#fee227] border-2 border-white  hover:text-black px-8 py-2 rounded-full mx-1 my-2 font-bold`}
               >
                 <TbLogin className="md:hidden" />

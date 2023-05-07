@@ -109,18 +109,18 @@ export const Login = () => {
                     onBlur={enteredUsernameBlurHandler}
                     value={enteredUsername}
                     className={`form-input 
-                    block w-full rounded-lg leading-none focus:outline-none placeholder-white
-                    [ transition-colors duration-200 ] 
+                    block w-full rounded-lg leading-none focus:outline-none placeholder-white 
+                    [ transition-colors duration-200 ] text-white
                     [ py-3 pr-3 md:py-4 md:pr-4 lg:py-4 lg:pr-4 pl-12 ] 
                     ${
-                      enteredUsernameHasError
+                      enteredPasswordHasError
                         ? "[ bg-red-50 focus:bg-black/25 ] "
                         : "[ bg-black/20 focus:bg-black/25 ]"
                     }
-                    [ text-white focus:text-gray-500 ]`}
+                    [  focus:text-black ]`}
                     type="text"
                     placeholder="Username"
-                  ></input>
+                  />
                 </label>
                 {enteredUsernameHasError && (
                   <p className="text-red-500 text-xs italic">
@@ -146,14 +146,14 @@ export const Login = () => {
                     value={enteredPassword}
                     className={`form-input 
                     block w-full rounded-lg leading-none focus:outline-none placeholder-white 
-                    [ transition-colors duration-200 ] 
+                    [ transition-colors duration-200 ] text-white
                     [ py-3 pr-3 md:py-4 md:pr-4 lg:py-4 lg:pr-4 pl-12 ] 
                     ${
                       enteredPasswordHasError
                         ? "[ bg-red-50 focus:bg-black/25 ] "
                         : "[ bg-black/20 focus:bg-black/25 ]"
                     }
-                    [ text-[#333] focus:text-black ]`}
+                    [  focus:text-black ]`}
                     type="password"
                     placeholder="Password"
                   />

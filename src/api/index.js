@@ -149,6 +149,28 @@ export const userReview = async (id, reviews) => {
   }
 };
 
+export const ratingMovie = async (id, review) => {
+  try {
+    const res = axios.put(`${baseURL}api/movies/rating/${id}`, {
+      ratings_per_user: review,
+    });
+    return res;
+  } catch (e) {
+    return null;
+  }
+};
+
+export const ratingUser = async (id, review) => {
+  try {
+    const res = axios.put(`${baseURL}api/users/rating/${id}`, {
+      ratings: review,
+    });
+    return res;
+  } catch (e) {
+    return null;
+  }
+};
+
 export const getAllGenre = async () => {
   try {
     const res = axios.get(`${baseURL}api/genre/getAll`);

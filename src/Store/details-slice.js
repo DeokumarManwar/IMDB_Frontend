@@ -16,7 +16,7 @@ const detailsSlice = createSlice({
     official_collection: "",
     likes: 0,
     dislikes: 0,
-    ratings: 0,
+    ratings: [],
     awards: [],
     tags: [],
     directors: [],
@@ -59,7 +59,7 @@ const detailsSlice = createSlice({
       state.official_collection = "";
       state.likes = 0;
       state.dislikes = 0;
-      state.ratings = 0;
+      state.ratings = [];
       state.awards = [];
       state.tags = [];
       state.directors = [];

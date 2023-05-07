@@ -10,7 +10,7 @@ import { GiFilmSpool } from "react-icons/gi";
 import { BiLike } from "react-icons/bi";
 import { BiDislike } from "react-icons/bi";
 import { AiFillStar } from "react-icons/ai";
-
+import { MdReviews } from "react-icons/md";
 import { detailsAction } from "../../Store/details-slice";
 import {
   getOneMovie,
@@ -20,14 +20,25 @@ import {
   dislikeById,
   movieReview,
   userReview,
+  ratingMovie,
+  ratingUser,
 } from "../../api";
 import { Navbar } from "../../components/Navbar";
+
+const removeElement = (arr, element) => {
+  const index = arr.indexOf(element);
+  if (index > -1) {
+    arr.splice(index, 1);
+  }
+  return arr;
+};
 
 export const Details = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState("");
+  const [ratings, setRatings] = useState(0);
   const [like, setLike] = useState(null);
   const allDetails = useSelector((state) => state.details);
   const allData = useSelector((state) => state.movie);
@@ -102,6 +113,14 @@ export const Details = () => {
   };
 
   useEffect(() => {
+    login.ratings.map((e) => {
+      if (e.movie_id === allDetails.title) {
+        setRatings(e.rating);
+      }
+    });
+  });
+
+  useEffect(() => {
     getOneMovie(id).then((res) => {
       let actordetails = [],
         actressdetails = [],
@@ -153,7 +172,7 @@ export const Details = () => {
           official_collection: res.data.movie.official_collection,
           likes: res.data.movie.likes,
           dislikes: res.data.movie.dislikes,
-          ratings: res.data.movie.ratings_per_user[0],
+          ratings: res.data.movie.ratings_per_user,
           awards: res.data.movie.awards,
           tags: res.data.movie.tags,
           directors: directordetails,
@@ -182,6 +201,33 @@ export const Details = () => {
       });
 
       setInputValue("");
+    }
+  };
+
+  const changeRatingHandler = (prevRating, newRating) => {
+    if (prevRating !== 0) {
+      let loginArray = [];
+      let movieArray = [...allDetails.ratings];
+      login.ratings.map((e) => {
+        if (e.movie_id === allDetails.title) {
+          loginArray.push({ movie_id: allDetails.title, rating: newRating });
+        }
+        loginArray.push(e);
+      });
+      const newMovieArray = removeElement(movieArray, prevRating);
+      newMovieArray.push(newRating);
+      ratingMovie(allDetails._id, newMovieArray);
+      ratingUser(login._id, loginArray);
+    }
+    if (prevRating === 0) {
+      ratingMovie(allDetails._id, [...allDetails.ratings, newRating]);
+      ratingUser(login._id, [
+        ...login.ratings,
+        {
+          movie_id: allDetails.title,
+          rating: newRating,
+        },
+      ]);
     }
   };
 
@@ -225,7 +271,7 @@ export const Details = () => {
             </div>
           </div>
           {/*likes,dislikes,ratings */}
-          <div className="text-white p-4 mt-4 ">
+          <div className="text-white p-4  ">
             <div className="flex flex-row gap-24 p-4 mt-8 ml-16">
               <button
                 onClick={likesHandler}
@@ -254,6 +300,81 @@ export const Details = () => {
                 <AiFillStar className="w-[35px] h-[35px] " />{" "}
                 {allDetails.ratings}
               </button>
+            </div>
+            <div className="flex items-center justify-center gap-2 mt-2">
+              <div
+                className={`flex flex-row items-center justify-center gap-2 cursor-pointer w-[100px] h-[50px] font-semibold text-black border  border-transparent rounded text-2xl`}
+              >
+                <AiFillStar
+                  className={`w-[35px] h-[50px]  ${
+                    ratings === 1 || ratings > 1
+                      ? "text-yellow-500"
+                      : "text-white"
+                  } `}
+                  onClick={() => {
+                    changeRatingHandler(ratings, 1);
+                    setRatings(1);
+                  }}
+                />
+              </div>
+              <div
+                className={`flex flex-row items-center justify-center gap-2 cursor-pointer w-[100px] h-[50px] font-semibold text-black border  border-transparent rounded text-2xl`}
+              >
+                <AiFillStar
+                  className={`w-[35px] h-[50px] ${
+                    ratings === 2 || ratings > 2
+                      ? "text-yellow-500"
+                      : "text-white"
+                  } `}
+                  onClick={() => {
+                    changeRatingHandler(ratings, 2);
+                    setRatings(2);
+                  }}
+                />
+              </div>
+              <div
+                className={`flex flex-row items-center justify-center gap-2 cursor-pointer w-[100px] h-[50px] font-semibold text-black border  border-transparent rounded text-2xl`}
+              >
+                <AiFillStar
+                  className={`w-[35px] h-[50px] ${
+                    ratings === 3 || ratings > 3
+                      ? "text-yellow-500"
+                      : "text-white"
+                  }`}
+                  onClick={() => {
+                    changeRatingHandler(ratings, 3);
+                    setRatings(3);
+                  }}
+                />
+              </div>
+              <div
+                className={`flex flex-row items-center justify-center gap-2 cursor-pointer w-[100px] h-[50px] font-semibold text-black border  border-transparent rounded text-2xl`}
+              >
+                <AiFillStar
+                  className={`w-[35px] h-[50px] ${
+                    ratings === 4 || ratings > 4
+                      ? "text-yellow-500"
+                      : "text-white"
+                  }`}
+                  onClick={() => {
+                    changeRatingHandler(ratings, 4);
+                    setRatings(4);
+                  }}
+                />
+              </div>
+              <div
+                className={`flex flex-row items-center justify-center gap-2 cursor-pointer   w-[100px] h-[50px] font-semibold text-black border  border-transparent rounded text-2xl`}
+              >
+                <AiFillStar
+                  className={`w-[35px] h-[50px] ${
+                    ratings === 5 ? "text-yellow-500" : "text-white"
+                  }`}
+                  onClick={() => {
+                    changeRatingHandler(ratings, 5);
+                    setRatings(5);
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>

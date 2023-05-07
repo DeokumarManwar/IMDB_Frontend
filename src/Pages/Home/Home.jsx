@@ -75,7 +75,6 @@ export const Home = () => {
   const genreArray = (data) => {
     let genreArray = [];
     allData.allMovies?.map((e) => {
-      console.log(allData.allGenre, data.name, e);
       return e.genre?.includes(data.name) ? genreArray.push(e) : null;
     });
     return genreArray;
