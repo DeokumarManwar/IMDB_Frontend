@@ -29,11 +29,9 @@ export const login = async (username, password) => {
   }
 };
 
-export const getOneMovie = async (data) => {
+export const getOneMovie = async (id) => {
   try {
-    const res = axios.get(
-      `${baseURL}api/movies/getOne/6456b2a402114df27d4ce46c`
-    );
+    const res = axios.get(`${baseURL}api/movies/getOne/${id}`);
     return res;
   } catch (e) {
     return null;

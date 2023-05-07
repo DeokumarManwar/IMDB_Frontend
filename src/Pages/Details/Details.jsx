@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
+import { useParams } from "react-router-dom";
 
 import { GiFilmSpool } from "react-icons/gi";
 import { BiLike } from "react-icons/bi";
@@ -20,8 +21,10 @@ import {
   movieReview,
   userReview,
 } from "../../api";
+import { Navbar } from "../../components/Navbar";
 
 export const Details = () => {
+  const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState("");
@@ -99,7 +102,7 @@ export const Details = () => {
   };
 
   useEffect(() => {
-    getOneMovie().then((res) => {
+    getOneMovie(id).then((res) => {
       let actordetails = [],
         actressdetails = [],
         directordetails = [];
@@ -183,186 +186,191 @@ export const Details = () => {
   };
 
   return (
-    <div className="flex flex-row">
-      <div className="flex flex-col h-screen fixed top-0 w-1/3 left-0 bg-[#0d0d0d] mt-24">
-        {/* Poster */}
-        <div className=" flex items-center justify-center">
-          <img
-            src={allDetails.image_url}
-            alt="movie"
-            className="w-[350px] h-[500px] mt-16"
-          />
-        </div>
-        {/* title */}
-        <div className="flex items-center justify-center">
-          <h2 className="text-3xl p-4 text-white font-semibold">
-            {allDetails.title}
-          </h2>
-        </div>
-        {/* Release Data, Duration */}
-        <div className="flex flex-col gap-2 mt-8">
-          <div className="relative flex flex-row text-lg p-2 text-white">
-            <h3 className="absolute left-24 text-xl font-serif text-white">
-              🎬 Release Date
-            </h3>
-            <h3 className="absolute flex flex-row gap-2 right-24 text-xl font-serif text-white">
-              <GiFilmSpool />
-              Duration
-            </h3>
+    <>
+      <Navbar />
+      <div className="flex flex-row">
+        <div className="flex flex-col h-screen fixed top-0 w-1/3 left-0 bg-[#0d0d0d] mt-24">
+          {/* Poster */}
+          <div className=" flex items-center justify-center">
+            <img
+              src={allDetails.image_url}
+              alt="movie"
+              className="w-[350px] h-[500px] mt-16"
+            />
           </div>
-          <div className="relative flex flex-row text-lg p-2 text-[#fee227]">
-            <h3 className="absolute left-24 text-xl font-serif">
-              {allDetails.releaseDate}
-            </h3>
-            <h3 className="absolute right-24 text-xl font-serif">
-              {allDetails.movie_duration}
-            </h3>
+          {/* title */}
+          <div className="flex items-center justify-center">
+            <h2 className="text-3xl p-4 text-white font-semibold">
+              {allDetails.title}
+            </h2>
+          </div>
+          {/* Release Data, Duration */}
+          <div className="flex flex-col gap-2 mt-8">
+            <div className="relative flex flex-row text-lg p-2 text-white">
+              <h3 className="absolute left-24 text-xl font-serif text-white">
+                🎬 Release Date
+              </h3>
+              <h3 className="absolute flex flex-row gap-2 right-24 text-xl font-serif text-white">
+                <GiFilmSpool />
+                Duration
+              </h3>
+            </div>
+            <div className="relative flex flex-row text-lg p-2 text-[#fee227]">
+              <h3 className="absolute left-24 text-xl font-serif">
+                {allDetails.releaseDate}
+              </h3>
+              <h3 className="absolute right-24 text-xl font-serif">
+                {allDetails.movie_duration}
+              </h3>
+            </div>
+          </div>
+          {/*likes,dislikes,ratings */}
+          <div className="text-white p-4 mt-4 ">
+            <div className="flex flex-row gap-24 p-4 mt-8 ml-16">
+              <button
+                onClick={likesHandler}
+                className={`flex flex-row gap-2  ${
+                  like === true
+                    ? "bg-blue-500 text-white border-transparent"
+                    : "text-blue-500 border-blue-500"
+                }  font-semibold py-2 px-4 border rounded text-2xl`}
+              >
+                <BiLike className="w-[35px] h-[35px]" /> {allDetails.likes}
+              </button>
+              <button
+                onClick={dislikeHandler}
+                className={`flex flex-row gap-2  ${
+                  like === false
+                    ? "bg-red-500 text-white border-transparent"
+                    : "border-red-500 text-red-500"
+                } font-semibold hover: py-2 px-4 border rounded text-2xl`}
+              >
+                <BiDislike className="w-[35px] h-[35px]" />{" "}
+                {allDetails.dislikes}
+              </button>
+              <button
+                className={`flex flex-row gap-2  bg-green-500  font-semibold text-white py-2 px-4 border border-green-500 border-transparent rounded text-2xl`}
+              >
+                <AiFillStar className="w-[35px] h-[35px] " />{" "}
+                {allDetails.ratings}
+              </button>
+            </div>
           </div>
         </div>
-        {/*likes,dislikes,ratings */}
-        <div className="text-white p-4 mt-4 ">
-          <div className="flex flex-row gap-24 p-4 mt-8 ml-16">
-            <button
-              onClick={likesHandler}
-              className={`flex flex-row gap-2  ${
-                like === true
-                  ? "bg-blue-500 text-white border-transparent"
-                  : "text-blue-500 border-blue-500"
-              }  font-semibold py-2 px-4 border rounded text-2xl`}
-            >
-              <BiLike className="w-[35px] h-[35px]" /> {allDetails.likes}
-            </button>
-            <button
-              onClick={dislikeHandler}
-              className={`flex flex-row gap-2  ${
-                like === false
-                  ? "bg-red-500 text-white border-transparent"
-                  : "border-red-500 text-red-500"
-              } font-semibold hover: py-2 px-4 border rounded text-2xl`}
-            >
-              <BiDislike className="w-[35px] h-[35px]" /> {allDetails.dislikes}
-            </button>
-            <button
-              className={`flex flex-row gap-2  bg-green-500  font-semibold text-white py-2 px-4 border border-green-500 border-transparent rounded text-2xl`}
-            >
-              <AiFillStar className="w-[35px] h-[35px] " /> {allDetails.ratings}
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="fixed top-0 right-0 w-2/3 h-full overflow-y-auto text-white bg-black gap-4">
-        <div className="flex flex-col gap-4 ">
-          {/*trailer */}
-          <div className="flex items-center justify-center mt-32 p-4">
-            <iframe
-              width="960"
-              height="540"
-              src={allDetails.trailer_url}
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            ></iframe>
-          </div>
-          {/*tags */}
-          <div className="flex flex-row gap-10 items-center justify-center">
-            {allDetails.tags.map((e) => {
-              return (
-                <div className="px-2 py-2 gap-2 bg-transparent hover:bg-white text-gray-200 font-semibold hover:text-black  border border-white hover:border-transparent rounded text-2xl">
-                  {e}
+        <div className="fixed top-0 right-0 w-2/3 h-full overflow-y-auto text-white bg-black gap-4">
+          <div className="flex flex-col gap-4 ">
+            {/*trailer */}
+            <div className="flex items-center justify-center mt-32 p-4">
+              <iframe
+                width="960"
+                height="540"
+                src={allDetails.trailer_url}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            </div>
+            {/*tags */}
+            <div className="flex flex-row gap-10 items-center justify-center">
+              {allDetails.tags.map((e) => {
+                return (
+                  <div className="px-2 py-2 gap-2 bg-transparent hover:bg-white text-gray-200 font-semibold hover:text-black  border border-white hover:border-transparent rounded text-2xl">
+                    {e}
+                  </div>
+                );
+              })}
+            </div>
+            {/*description */}
+            <div className="flex font-semibold text-xl p-4 items-center justify-center">
+              <h1 className="w-[900px]">{allDetails.description}</h1>
+            </div>
+            {/*Stars */}
+            <div className="flex flex-col font-semibold text-xl  gap-4 items-center justify-center p-4">
+              <h1 className="text-3xl text-blue-300">Stars</h1>
+              <div className="flex flex-row gap-8 items-center justify-center">
+                <div className="flex flex-wrap flex-col h-[370px] drop-shadow-lg relative items-center overflow-hidden ">
+                  <motion.img
+                    whileHover={{ scale: 1.05 }}
+                    src={allDetails.actor[0]?.image_url}
+                    className="w-[225px] h-[300px] object-cover"
+                  />
+                  <p className="flex items-center justify-center text-center">
+                    <span className="text-3xl font-mono text-center text-blue-300 mt-2">
+                      {allDetails.actor[0]?.name}
+                    </span>
+                  </p>
                 </div>
-              );
-            })}
-          </div>
-          {/*description */}
-          <div className="flex font-semibold text-xl p-4 items-center justify-center">
-            <h1 className="w-[900px]">{allDetails.description}</h1>
-          </div>
-          {/*Stars */}
-          <div className="flex flex-col font-semibold text-xl  gap-4 items-center justify-center p-4">
-            <h1 className="text-3xl text-blue-300">Stars</h1>
-            <div className="flex flex-row gap-8 items-center justify-center">
-              <div className="flex flex-wrap flex-col h-[370px] drop-shadow-lg relative items-center overflow-hidden ">
-                <motion.img
-                  whileHover={{ scale: 1.05 }}
-                  src={allDetails.actor[0]?.image_url}
-                  className="w-[225px] h-[300px] object-cover"
-                />
-                <p className="flex items-center justify-center text-center">
-                  <span className="text-3xl font-mono text-center text-blue-300 mt-2">
-                    {allDetails.actor[0]?.name}
-                  </span>
-                </p>
-              </div>
-              <div className="flex flex-wrap flex-col h-[370px] drop-shadow-lg relative items-center overflow-hidden">
-                <motion.img
-                  whileHover={{ scale: 1.05 }}
-                  src={allDetails.actress[0]?.image_url}
-                  className="w-[225px] h-[300px] object-cover"
-                />
-                <p className="flex items-center justify-center text-center">
-                  <span className="text-3xl font-mono text-center text-blue-300 mt-2">
-                    {allDetails.actress[0]?.name}
-                  </span>
-                </p>
+                <div className="flex flex-wrap flex-col h-[370px] drop-shadow-lg relative items-center overflow-hidden">
+                  <motion.img
+                    whileHover={{ scale: 1.05 }}
+                    src={allDetails.actress[0]?.image_url}
+                    className="w-[225px] h-[300px] object-cover"
+                  />
+                  <p className="flex items-center justify-center text-center">
+                    <span className="text-3xl font-mono text-center text-blue-300 mt-2">
+                      {allDetails.actress[0]?.name}
+                    </span>
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-          {/*Directors */}
-          <div className="flex flex-col font-semibold text-xl gap-4 items-center justify-center p-4">
-            <h1 className="text-3xl text-yellow-300">Directors</h1>
-            <div className="flex flex-row gap-8 items-center justify-center">
-              {allDetails.directors.map((e) => {
-                return (
-                  <div className="flex flex-wrap flex-col h-[370px] drop-shadow-lg relative items-center overflow-hidden">
-                    <motion.img
-                      whileHover={{ scale: 1.05 }}
-                      src={e.image_url}
-                      className="w-[225px] h-[300px] object-cover"
-                    />
-                    <p className="flex items-center justify-center text-center">
-                      <span className="text-3xl font-mono text-center text-yellow-300 mt-2">
-                        {e.name}
-                      </span>
-                    </p>
-                  </div>
-                );
-              })}
+            {/*Directors */}
+            <div className="flex flex-col font-semibold text-xl gap-4 items-center justify-center p-4">
+              <h1 className="text-3xl text-yellow-300">Directors</h1>
+              <div className="flex flex-row gap-8 items-center justify-center">
+                {allDetails.directors.map((e) => {
+                  return (
+                    <div className="flex flex-wrap flex-col h-[370px] drop-shadow-lg relative items-center overflow-hidden">
+                      <motion.img
+                        whileHover={{ scale: 1.05 }}
+                        src={e.image_url}
+                        className="w-[225px] h-[300px] object-cover"
+                      />
+                      <p className="flex items-center justify-center text-center">
+                        <span className="text-3xl font-mono text-center text-yellow-300 mt-2">
+                          {e.name}
+                        </span>
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-          {/*Comments*/}
-          <div className="flex flex-col mb-8">
-            <h1 className="mx-12 text-bold font-sans text-3xl">Comments</h1>
-            <div className="flex flex-row gap-4 mx-16 mt-4 ">
-              <img
-                src={login.image_url}
-                className="w-16 h-16 min-w-[44px] object-cover  rounded-full shadow-lg"
-                alt=""
-                referrerPolicy="no-referrer"
-              />
-              <input
-                className="rounded-full p-4 w-[1200px] text-black font-bold "
-                value={inputValue}
-                onChange={(event) => setInputValue(event.target.value)}
-                placeholder="Type your Comment"
-                onKeyDown={CommentHandler}
-              />
-            </div>
-            <div className="flex flex-col gap-2 mx-40 mt-4 ">
-              {allDetails.reviews.map((e) => {
-                return (
-                  <div className="">
-                    <h1 className="font-semibold text-xl text-yellow-300">
-                      {e.user_id}
-                    </h1>
-                    <h1 className="mx-2">{e.comment}</h1>
-                  </div>
-                );
-              })}
+            {/*Comments*/}
+            <div className="flex flex-col mb-8">
+              <h1 className="mx-12 text-bold font-sans text-3xl">Comments</h1>
+              <div className="flex flex-row gap-4 mx-16 mt-4 ">
+                <img
+                  src={login.image_url}
+                  className="w-16 h-16 min-w-[44px] object-cover  rounded-full shadow-lg"
+                  alt=""
+                  referrerPolicy="no-referrer"
+                />
+                <input
+                  className="rounded-full p-4 w-[1200px] text-black font-bold "
+                  value={inputValue}
+                  onChange={(event) => setInputValue(event.target.value)}
+                  placeholder="Type your Comment"
+                  onKeyDown={CommentHandler}
+                />
+              </div>
+              <div className="flex flex-col gap-2 mx-40 mt-4 ">
+                {allDetails.reviews.map((e) => {
+                  return (
+                    <div className="">
+                      <h1 className="font-semibold text-xl text-yellow-300">
+                        {e.user_id}
+                      </h1>
+                      <h1 className="mx-2">{e.comment}</h1>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };

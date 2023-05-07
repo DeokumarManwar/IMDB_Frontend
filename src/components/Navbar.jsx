@@ -14,12 +14,14 @@ import { BiCameraMovie } from "react-icons/bi";
 import { TbChairDirector } from "react-icons/tb";
 import { FaMale } from "react-icons/fa";
 import { FaFemale } from "react-icons/fa";
+import { BiGridSmall } from "react-icons/bi";
 
-export const Navbar = () => {
+export const Navbar = ({ setType, setInputValue, inputValue }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userData = useSelector((state) => state.login);
   const [isMenu, setIsMenu] = useState(false);
+  const [search, setSearch] = useState("");
   const [isFilter, setIsFilter] = useState(false);
   const [filterName, setFilterName] = useState("movies");
 
@@ -82,26 +84,47 @@ export const Navbar = () => {
                   >
                     <p
                       className="flex flex-row gap-2 items-center justify-center text-textColor hover:bg-[#fee227] hover:rounded-full p-2 hover:font-bold duration-150 transition-all ease-in-out text-xl text-center cursor-pointer"
-                      onClick={() => setFilterName("movies")}
+                      onClick={() => {
+                        setFilterName("all");
+                        setType("all");
+                      }}
                     >
-                      <BiCameraMovie className=" h-8 w-8 " /> movies
+                      <BiGridSmall className=" h-8 w-8 " /> All
                     </p>
                     <p
                       className="flex flex-row gap-2 items-center justify-center text-textColor hover:bg-[#fee227] hover:rounded-full p-2 hover:font-bold duration-150 transition-all ease-in-out text-xl text-center cursor-pointer"
-                      onClick={() => setFilterName("actor")}
+                      onClick={() => {
+                        setFilterName("movies");
+                        setType("movies");
+                      }}
+                    >
+                      <BiCameraMovie className=" h-8 w-8 " /> Movies
+                    </p>
+                    <p
+                      className="flex flex-row gap-2 items-center justify-center text-textColor hover:bg-[#fee227] hover:rounded-full p-2 hover:font-bold duration-150 transition-all ease-in-out text-xl text-center cursor-pointer"
+                      onClick={() => {
+                        setFilterName("actor");
+                        setType("actor");
+                      }}
                     >
                       <FaMale className=" h-6 w-6 " /> Actor
                     </p>
                     <p
                       className="flex flex-row gap-2 items-center justify-center text-textColor hover:bg-[#fee227] hover:rounded-full p-2 hover:font-bold duration-150 transition-all ease-in-out text-xl text-center cursor-pointer"
-                      onClick={() => setFilterName("actress")}
+                      onClick={() => {
+                        setFilterName("actress");
+                        setType("actress");
+                      }}
                     >
                       <FaFemale className=" h-6 w-6 " />
                       Actress
                     </p>
                     <p
                       className="flex flex-row gap-2 items-center justify-center text-textColor hover:bg-[#fee227] hover:rounded-full p-2 hover:font-bold duration-150 transition-all ease-in-out text-xl text-center cursor-pointer"
-                      onClick={() => setFilterName("director")}
+                      onClick={() => {
+                        setFilterName("director");
+                        setType("director");
+                      }}
                     >
                       <TbChairDirector className=" h-8 w-6 " />
                       Director
@@ -110,16 +133,28 @@ export const Navbar = () => {
                 )}
               </span>
               <input
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
                 className="h-16 border font-bold w-[1000px] py-1 px-2 outline-none text-xl "
                 type="text"
                 placeholder="Search One-IMDB"
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    setInputValue(search);
+                  }
+                }}
               />
               <span className="flex items-center   border-0 px-3 font-bold text-grey-100 rounded-full">
                 <motion.button
                   whileHover={{ scale: 1.2 }}
                   className="bg-gredient-dark hover:bg-gredient-light text-lg text-black font-bold py-2 px-4"
                 >
-                  <BiSearchAlt className="h-8 w-8 text-white hover:text-[#fee227]" />
+                  <BiSearchAlt
+                    onClick={() => {
+                      setInputValue(search);
+                    }}
+                    className="h-8 w-8 text-white hover:text-[#fee227]"
+                  />
                 </motion.button>
               </span>
             </div>

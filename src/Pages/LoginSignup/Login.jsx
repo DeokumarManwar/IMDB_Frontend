@@ -82,7 +82,7 @@ export const Login = () => {
 
   return (
     <div className="absolute inset-0 flex items-center justify-center p-4 form-wrapper ">
-      <div className=" md:w-[400px] flex flex-col rounded-2xl bg-white bg-opacity-20 backdrop-filter backdrop-blur-md shadow-2xl shadow-black ">
+      <div className=" md:w-[400px] flex flex-col rounded-2xl bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm shadow-2xl shadow-black ">
         <div className="text-center mt-4 p-2 ">
           <div className="flex items-center justify-center ">
             <img src={Logo} alt="Logo" className="h-[80px] w-auto" />
@@ -94,11 +94,11 @@ export const Login = () => {
           <div className="flex flex-wrap mx-3 mb-4">
             <div className="w-full md:w-full px-3 mb-3">
               <div className="flex flex-col">
-                <label className="form-label relative block mb-1 text-black/50 focus-within:text-[#333]">
+                <label className="form-label relative block mb-1 text-white/50 focus-within:text-[#333]">
                   <BiUserCircle
                     className="label-icon 
                   transition pointer-events-none
-                  [ w-6 h-6 ] 
+                  [ w-6 h-6 ] text-white
                   [ absolute top-1/2 left-3 ] 
                   [ transform -translate-y-1/2 ]"
                   />
@@ -109,7 +109,7 @@ export const Login = () => {
                     onBlur={enteredUsernameBlurHandler}
                     value={enteredUsername}
                     className={`form-input 
-                    block w-full rounded-lg leading-none focus:outline-none placeholder-black/50 
+                    block w-full rounded-lg leading-none focus:outline-none placeholder-white
                     [ transition-colors duration-200 ] 
                     [ py-3 pr-3 md:py-4 md:pr-4 lg:py-4 lg:pr-4 pl-12 ] 
                     ${
@@ -117,7 +117,7 @@ export const Login = () => {
                         ? "[ bg-red-50 focus:bg-black/25 ] "
                         : "[ bg-black/20 focus:bg-black/25 ]"
                     }
-                    [ text-[#333] focus:text-black ]`}
+                    [ text-white focus:text-gray-500 ]`}
                     type="text"
                     placeholder="Username"
                   ></input>
@@ -131,11 +131,11 @@ export const Login = () => {
             </div>
             <div className="w-full md:w-full px-3 mb-3">
               <div className="flex flex-col">
-                <label className="form-label relative block mb-1 text-black/50 focus-within:text-[#333]">
+                <label className="form-label relative block mb-1 text-white/50 focus-within:text-[#333]">
                   <RiLockPasswordLine
                     className="label-icon 
                   transition pointer-events-none
-                  [ w-6 h-6 ] 
+                  [ w-6 h-6 ] text-white
                   [ absolute top-1/2 left-3 ] 
                   [ transform -translate-y-1/2 ]"
                   />
@@ -145,7 +145,7 @@ export const Login = () => {
                     onBlur={enteredPasswordBlurHandler}
                     value={enteredPassword}
                     className={`form-input 
-                    block w-full rounded-lg leading-none focus:outline-none placeholder-black/50 
+                    block w-full rounded-lg leading-none focus:outline-none placeholder-white 
                     [ transition-colors duration-200 ] 
                     [ py-3 pr-3 md:py-4 md:pr-4 lg:py-4 lg:pr-4 pl-12 ] 
                     ${

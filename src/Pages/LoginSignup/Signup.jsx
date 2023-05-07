@@ -92,12 +92,14 @@ export const Signup = () => {
 
   return (
     <div className="absolute inset-0 flex items-center justify-center p-4 form-wrapper ">
-      <div className="md:w-[400px] flex flex-col rounded-2xl bg-white bg-opacity-50 backdrop-filter backdrop-blur-md">
+      <div className="md:w-[400px] flex flex-col rounded-2xl bg-white bg-opacity-20 backdrop-filter backdrop-blur-sm shadow-2xl shadow-black ">
         <div className="text-center mt-4 p-2">
           <div className="flex items-center justify-center ">
             <img src={Logo} alt="Logo" className="h-20 w-20" />
           </div>
-          <h2 className="font-bold text-3xl tracking-tight ">Sign Up to CPC</h2>
+          <h2 className="font-bold text-3xl tracking-tight ">
+            Register to IMDB
+          </h2>
         </div>
 
         <div className="w-full max-w-xl p-2">
@@ -108,7 +110,7 @@ export const Signup = () => {
                   <MdDriveFileRenameOutline
                     className="label-icon 
                     transition pointer-events-none
-                    [ w-6 h-6 ] 
+                    [ w-6 h-6 ] text-white
                     [ absolute top-1/2 left-3 ] 
                     [ transform -translate-y-1/2 ]"
                   />
@@ -118,7 +120,7 @@ export const Signup = () => {
                     onBlur={enteredFirstNameBlurHandler}
                     value={enteredFirstName}
                     className={`form-input 
-                      block w-full rounded-lg leading-none focus:outline-none placeholder-black/50 
+                      block w-full rounded-lg leading-none focus:outline-none placeholder-white
                       [ transition-colors duration-200 ] 
                       [ py-3 pr-3 md:py-4 md:pr-4 lg:py-4 lg:pr-4 pl-12 ] 
                       [ text-[#333]  focus:text-black ]
@@ -146,7 +148,7 @@ export const Signup = () => {
                   <RiLockPasswordFill
                     className="label-icon 
                   transition pointer-events-none
-                  [ w-6 h-6 ] 
+                  [ w-6 h-6 ] text-white
                   [ absolute top-1/2 left-3 ] 
                   [ transform -translate-y-1/2 ]"
                   />
@@ -156,7 +158,7 @@ export const Signup = () => {
                     onBlur={enteredPasswordBlurHandler}
                     value={enteredPassword}
                     className={`form-input 
-                    block w-full rounded-lg leading-none focus:outline-none placeholder-black/50 
+                    block w-full rounded-lg leading-none focus:outline-none placeholder-white
                     [ transition-colors duration-200 ] 
                     [ py-3 pr-3 md:py-4 md:pr-4 lg:py-4 lg:pr-4 pl-12 ] 
                     ${
@@ -184,7 +186,7 @@ export const Signup = () => {
                   <RiLockPasswordLine
                     className="label-icon 
                   transition pointer-events-none
-                  [ w-6 h-6 ] 
+                  [ w-6 h-6 ] text-white
                   [ absolute top-1/2 left-3 ] 
                   [ transform -translate-y-1/2 ]"
                   />
@@ -195,7 +197,7 @@ export const Signup = () => {
                     onBlur={enteredCPasswordBlurHandler}
                     value={enteredCPassword}
                     className={`form-input 
-                    block w-full rounded-lg leading-none focus:outline-none placeholder-black/50 
+                    block w-full rounded-lg leading-none focus:outline-none placeholder-white
                     [ transition-colors duration-200 ] 
                     [ py-3 pr-3 md:py-4 md:pr-4 lg:py-4 lg:pr-4 pl-12 ] 
                     ${
@@ -355,9 +357,9 @@ export const FileUploader = ({
       <div className="flex flex-col items-center justify-center h-full">
         <div className="flex flex-col justify-center items-center cursor-pointer">
           <p className="font-bold text-2xl">
-            <BiCloudUpload className="w-12 h-12" />
+            <BiCloudUpload className="w-12 h-12 text-white" />
           </p>
-          <p className="text-lg text-center">
+          <p className="text-lg text-center text-white">
             Click to Upload an Profile Image
           </p>
         </div>
