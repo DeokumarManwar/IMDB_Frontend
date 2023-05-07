@@ -53,7 +53,6 @@ export const Login = () => {
     if (formIsValid) {
       login(enteredUsername, enteredPassword)
         .then((res) => {
-          console.log(enteredPassword, enteredUsername, res);
           if (res) {
             dispatch(
               loginAction.addLogin({
@@ -63,6 +62,7 @@ export const Login = () => {
                 dislikes: res.data.user.dislike,
                 reviews: res.data.user.reviews,
                 ratings: res.data.user.ratings,
+                _id: res.data.user._id,
               })
             );
             dispatch(loaderAction.changeLoaderStateFalse());

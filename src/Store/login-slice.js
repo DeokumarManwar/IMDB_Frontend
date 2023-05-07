@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const loginSlice = createSlice({
   name: "login",
   initialState: {
+    _id: "",
     username: "",
     image_url: "",
     likes: [],
@@ -13,6 +14,7 @@ const loginSlice = createSlice({
   },
   reducers: {
     addLogin(state, action) {
+      state._id = action.payload._id;
       state.username = action.payload.username;
       state.image_url = action.payload.image_url;
       state.likes = action.payload.likes;
@@ -22,6 +24,7 @@ const loginSlice = createSlice({
       state.isLogin = true;
     },
     logout(state) {
+      state._id = "";
       state.username = "";
       state.image_url = "";
       state.likes = [];

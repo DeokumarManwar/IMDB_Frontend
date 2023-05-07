@@ -114,7 +114,7 @@ export const Navbar = () => {
                 type="text"
                 placeholder="Search One-IMDB"
               />
-              <span class="flex items-center   border-0 px-3 font-bold text-grey-100 rounded-full">
+              <span className="flex items-center   border-0 px-3 font-bold text-grey-100 rounded-full">
                 <motion.button
                   whileHover={{ scale: 1.2 }}
                   className="bg-gredient-dark hover:bg-gredient-light text-lg text-black font-bold py-2 px-4"

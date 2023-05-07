@@ -4,13 +4,34 @@ const movieSlice = createSlice({
   name: "movies",
   initialState: {
     allMovies: null,
+    allDirectors: null,
+    allActors: null,
+    allActress: null,
   },
   reducers: {
     addMovies(state, action) {
-      state.allMovies = action.payload.allMovies;
+      state.allMovies = action.payload;
     },
     removeMovies(state) {
       state.allMovies = null;
+    },
+    addDirectors(state, action) {
+      state.allDirectors = action.payload;
+    },
+    removeDirectors(state) {
+      state.allDirectors = null;
+    },
+    addActors(state, action) {
+      state.allActors = action.payload;
+    },
+    removeActors(state) {
+      state.allActors = null;
+    },
+    addActress(state, action) {
+      state.allActress = action.payload;
+    },
+    removeActress(state) {
+      state.allActress = null;
     },
   },
 });

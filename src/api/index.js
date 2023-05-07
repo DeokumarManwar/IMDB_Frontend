@@ -29,6 +29,17 @@ export const login = async (username, password) => {
   }
 };
 
+export const getOneMovie = async (data) => {
+  try {
+    const res = axios.get(
+      `${baseURL}api/movies/getOne/6456b2a402114df27d4ce46c`
+    );
+    return res;
+  } catch (e) {
+    return null;
+  }
+};
+
 export const saveMovie = async (data) => {
   try {
     const res = axios.post(`${baseURL}api/movies/save`, { ...data });
@@ -38,9 +49,102 @@ export const saveMovie = async (data) => {
   }
 };
 
-export const getAllMovie = async (data) => {
+export const getAllMovie = async () => {
   try {
     const res = axios.get(`${baseURL}api/movies/getAll`);
+    return res;
+  } catch (e) {
+    return null;
+  }
+};
+
+export const getAllActors = async () => {
+  try {
+    const res = axios.get(`${baseURL}api/actor/getAll`);
+    return res;
+  } catch (e) {
+    return null;
+  }
+};
+
+export const getAllActress = async () => {
+  try {
+    const res = axios.get(`${baseURL}api/actress/getAll`);
+    return res;
+  } catch (e) {
+    return null;
+  }
+};
+
+export const getAllDirector = async () => {
+  try {
+    const res = axios.get(`${baseURL}api/director/getAll`);
+    return res;
+  } catch (e) {
+    return null;
+  }
+};
+
+export const likeById = async (id, likes) => {
+  try {
+    const res = axios.put(`${baseURL}api/movies/like/${id}`, {
+      likes: likes,
+    });
+    return res;
+  } catch (e) {
+    return null;
+  }
+};
+
+export const dislikeById = async (id, dislikes) => {
+  try {
+    const res = axios.put(`${baseURL}api/movies/dislike/${id}`, {
+      dislikes: dislikes,
+    });
+    return res;
+  } catch (e) {
+    return null;
+  }
+};
+
+export const userLikeById = async (id, likes) => {
+  try {
+    const res = axios.put(`${baseURL}api/users/like/${id}`, {
+      likes: likes,
+    });
+    return res;
+  } catch (e) {
+    return null;
+  }
+};
+
+export const userDislikeById = async (id, dislike) => {
+  try {
+    const res = axios.put(`${baseURL}api/users/dislike/${id}`, {
+      dislike: dislike,
+    });
+    return res;
+  } catch (e) {
+    return null;
+  }
+};
+
+export const movieReview = async (id, reviews) => {
+  try {
+    const res = axios.put(`${baseURL}api/movies/review/${id}`, {
+      reviews: reviews,
+    });
+    return res;
+  } catch (e) {
+    return null;
+  }
+};
+
+export const userReview = async (id, reviews) => {
+  try {
+    const res = axios.put(`${baseURL}api/users/review/${id}`, {
+      reviews: reviews,
+    });
     return res;
   } catch (e) {
     return null;
