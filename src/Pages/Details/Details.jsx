@@ -316,7 +316,10 @@ export const Details = () => {
                 className={`flex flex-row gap-2  bg-green-500  font-semibold text-white py-2 px-4 border border-green-500 border-transparent rounded text-2xl`}
               >
                 <AiFillStar className="w-[35px] h-[35px] " />{" "}
-                {allDetails.ratings}
+                {(
+                  allDetails.ratings.reduce((acc, val) => acc + val, 0) /
+                  allDetails.ratings.length
+                ).toFixed(2)}
               </button>
             </div>
             <div className="flex items-center justify-center gap-2 mt-2">

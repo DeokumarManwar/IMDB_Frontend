@@ -16,7 +16,7 @@ const App = () => {
         <Route path="/login" element={<LoginSignUp />} />
         <Route path="/signup" element={<LoginSignUp />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/movie/:id" element={<Details />} />
+        {login.isLogin && <Route path="/movie/:id" element={<Details />} />}
       </Routes>
       <Loader />
     </>
