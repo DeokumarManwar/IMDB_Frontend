@@ -29,6 +29,15 @@ export const login = async (username, password) => {
   }
 };
 
+export const getUserById = async (id) => {
+  try {
+    const res = axios.get(`${baseURL}api/users/getOne/${id}`);
+    return res;
+  } catch (e) {
+    return null;
+  }
+};
+
 export const getOneMovie = async (id) => {
   try {
     const res = axios.get(`${baseURL}api/movies/getOne/${id}`);

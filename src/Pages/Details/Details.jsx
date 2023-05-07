@@ -22,8 +22,10 @@ import {
   userReview,
   ratingMovie,
   ratingUser,
+  getUserById,
 } from "../../api";
 import { Navbar } from "../../components/Navbar";
+import { loginAction } from "../../Store/login-slice";
 
 const removeElement = (arr, element) => {
   const index = arr.indexOf(element);
@@ -229,6 +231,22 @@ export const Details = () => {
         },
       ]);
     }
+    getUserById(login._id).then((res) => {
+      if (res) {
+        dispatch(loginAction.logout());
+        dispatch(
+          loginAction.addLogin({
+            username: res.data.user.userName,
+            image_url: res.data.user.image_url,
+            likes: res.data.user.likes,
+            dislikes: res.data.user.dislike,
+            reviews: res.data.user.reviews,
+            ratings: res.data.user.ratings,
+            _id: res.data.user._id,
+          })
+        );
+      }
+    });
   };
 
   return (
