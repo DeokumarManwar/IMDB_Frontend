@@ -148,3 +148,12 @@ export const userReview = async (id, reviews) => {
     return null;
   }
 };
+
+export const getAllGenre = async () => {
+  try {
+    const res = axios.get(`${baseURL}api/genre/getAll`);
+    return res;
+  } catch (e) {
+    return null;
+  }
+};

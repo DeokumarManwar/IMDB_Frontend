@@ -11,6 +11,7 @@ import {
   getAllActors,
   getAllActress,
   getAllDirector,
+  getAllGenre,
   getAllMovie,
 } from "../../api";
 import { Navbar } from "../../components/Navbar";
@@ -37,6 +38,9 @@ export const Home = () => {
     });
     getAllDirector().then((res) => {
       dispatch(movieAction.addDirectors(res.data.directors));
+    });
+    getAllGenre().then((res) => {
+      dispatch(movieAction.addGenre(res.data.genres));
     });
   }, []);
 
@@ -66,6 +70,15 @@ export const Home = () => {
       }
     });
     return moviesArray;
+  };
+  // console.log(allData);
+  const genreArray = (data) => {
+    let genreArray = [];
+    allData.allMovies?.map((e) => {
+      console.log(allData.allGenre, data.name, e);
+      return e.genre?.includes(data.name) ? genreArray.push(e) : null;
+    });
+    return genreArray;
   };
 
   const directorArray = (data) => {
@@ -138,6 +151,7 @@ export const Home = () => {
             </div>
           </div>
         )}
+        {/* Directors */}
         {(type === "all" || type === "director") &&
           allData.allDirectors &&
           allData.allDirectors?.map((data, index) => {
@@ -145,7 +159,7 @@ export const Home = () => {
               return (
                 <div className="relative w-full my-4 p-4 pt-32 pb-14 ">
                   <div>
-                    <div className="absolute top-4 left-6 flex items-center gap-4">
+                    <div className="absolute top-4 left-40 flex items-center gap-4">
                       <img
                         alt=""
                         src={data.image_url}
@@ -173,7 +187,7 @@ export const Home = () => {
               return (
                 <div className="relative w-full my-4 p-4 pt-32 pb-14 ">
                   <div>
-                    <div className="absolute top-4 left-6 flex items-center gap-4">
+                    <div className="absolute top-4 left-40 flex items-center gap-4">
                       <img
                         alt=""
                         src={data.image_url}
@@ -191,6 +205,7 @@ export const Home = () => {
               );
             }
           })}
+        {/* Actors */}
         {(type === "all" || type === "actor") &&
           allData.allActors &&
           allData.allActors?.map((data, index) => {
@@ -198,7 +213,7 @@ export const Home = () => {
               return (
                 <div className="relative w-full my-4 p-4 pt-32 pb-14 ">
                   <div>
-                    <div className="absolute top-4 left-6 flex items-center gap-4">
+                    <div className="absolute top-4 left-40 flex items-center gap-4">
                       <img
                         alt=""
                         src={data.image_url}
@@ -227,7 +242,7 @@ export const Home = () => {
               return (
                 <div className="relative w-full my-4 p-4 pt-32 pb-14 ">
                   <div>
-                    <div className="absolute top-4 left-6 flex items-center gap-4">
+                    <div className="absolute top-4 left-40 flex items-center gap-4">
                       <img
                         alt=""
                         src={data.image_url}
@@ -248,6 +263,67 @@ export const Home = () => {
               );
             }
           })}
+        {/* Genre */}
+        {(type === "all" || type === "genre") &&
+          allData.allGenre &&
+          allData.allGenre?.map((data, index) => {
+            if (inputValue === "") {
+              return (
+                <div className="relative w-full my-4 p-4 pt-32 pb-14 ">
+                  <div>
+                    <div className="absolute top-4 left-40 flex items-center gap-4">
+                      <img
+                        alt=""
+                        src={data.image_url}
+                        className="w-20 h-20 rounded-full object-cover"
+                      />
+                      <p className="text-lg text-center font-bold my-2 text-white">
+                        {data.name} Genre
+                      </p>
+                    </div>
+                  </div>
+                  <div>
+                    <MovieContainerMain
+                      data={genreArray(data)}
+                      inputValue={inputValue}
+                    />
+                  </div>
+                </div>
+              );
+            }
+            if (
+              inputValue !== "" &&
+              inputValue?.toLowerCase().replace(/\s/g, "") ===
+                data.name
+                  ?.toLowerCase()
+                  .replace(/\s/g, "")
+                  .substring(0, inputValue.length)
+            ) {
+              return (
+                <div className="relative w-full my-4 p-4 pt-32 pb-14 ">
+                  <div>
+                    <div className="absolute top-4 left-40 flex items-center gap-4">
+                      <img
+                        alt=""
+                        src={data.image_url}
+                        className="w-20 h-20 rounded-full object-cover"
+                      />
+                      <p className="text-lg text-center font-bold my-2 text-white">
+                        {data.name} Genre
+                      </p>
+                    </div>
+                  </div>
+                  <div>
+                    <MovieContainerMain
+                      data={genreArray(data)}
+                      inputValue={inputValue}
+                    />
+                  </div>
+                </div>
+              );
+            }
+          })}
+        {/* Actress */}
         {(type === "all" || type === "actress") &&
           allData.allActress &&
           allData.allActress?.map((data, index) => {
@@ -255,7 +331,7 @@ export const Home = () => {
               return (
                 <div className="relative w-full my-4 p-4 pt-32 pb-14 ">
                   <div>
-                    <div className="absolute top-4 left-6 flex items-center gap-4">
+                    <div className="absolute top-4 left-40 flex items-center gap-4">
                       <img
                         alt=""
                         src={data.image_url}
@@ -286,7 +362,7 @@ export const Home = () => {
               return (
                 <div className="relative w-full my-4 p-4 pt-32 pb-14 ">
                   <div>
-                    <div className="absolute top-4 left-6 flex items-center gap-4">
+                    <div className="absolute top-4 left-40 flex items-center gap-4">
                       <img
                         alt=""
                         src={data.image_url}

@@ -7,6 +7,7 @@ const movieSlice = createSlice({
     allDirectors: null,
     allActors: null,
     allActress: null,
+    allGenre: null,
   },
   reducers: {
     addMovies(state, action) {
@@ -32,6 +33,12 @@ const movieSlice = createSlice({
     },
     removeActress(state) {
       state.allActress = null;
+    },
+    addGenre(state, action) {
+      state.allGenre = action.payload;
+    },
+    removeGenre(state) {
+      state.allGenre = null;
     },
   },
 });

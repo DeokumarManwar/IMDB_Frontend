@@ -15,6 +15,7 @@ import { TbChairDirector } from "react-icons/tb";
 import { FaMale } from "react-icons/fa";
 import { FaFemale } from "react-icons/fa";
 import { BiGridSmall } from "react-icons/bi";
+import { GiMusicalScore } from "react-icons/gi";
 
 export const Navbar = ({ setType, setInputValue, inputValue }) => {
   const dispatch = useDispatch();
@@ -63,6 +64,9 @@ export const Navbar = ({ setType, setInputValue, inputValue }) => {
                 className="flex w-[100px] cursor-pointer items-center justify-center rounded-full text-white border-0 hover:text-[#fee227] px-3 font-bold text-grey-100"
               >
                 <motion.div whileHover={{ scale: 1.15 }}>
+                  {filterName === "all" && (
+                    <BiGridSmall className=" h-12 w-12 " />
+                  )}
                   {filterName === "movies" && (
                     <BiCameraMovie className=" h-8 w-8 " />
                   )}
@@ -72,6 +76,9 @@ export const Navbar = ({ setType, setInputValue, inputValue }) => {
                   )}
                   {filterName === "director" && (
                     <TbChairDirector className=" h-8 w-6 " />
+                  )}
+                  {filterName === "genre" && (
+                    <GiMusicalScore className=" h-8 w-6 " />
                   )}
                 </motion.div>
 
@@ -128,6 +135,16 @@ export const Navbar = ({ setType, setInputValue, inputValue }) => {
                     >
                       <TbChairDirector className=" h-8 w-6 " />
                       Director
+                    </p>
+                    <p
+                      className="flex flex-row gap-2 items-center justify-center text-textColor hover:bg-[#fee227] hover:rounded-full p-2 hover:font-bold duration-150 transition-all ease-in-out text-xl text-center cursor-pointer"
+                      onClick={() => {
+                        setFilterName("genre");
+                        setType("genre");
+                      }}
+                    >
+                      <GiMusicalScore className=" h-8 w-6 " />
+                      Genre
                     </p>
                   </motion.div>
                 )}
@@ -206,7 +223,7 @@ export const Navbar = ({ setType, setInputValue, inputValue }) => {
                   exit={{ opacity: 0, y: 50 }}
                   className="absolute z-10 top-12 right-0 w-225 p-4 gap-4 bg-card shadow-lg rounded-lg backdrop-blur-sm flex flex-col"
                 >
-                  {userData.username === "Deokumar" && (
+                  {userData.username === "Deokumar12" && (
                     <NavLink to={"/dashboard/home"}>
                       <p className="text-textColor hover:font-bold duration-150 transition-all ease-in-out text-xl text-center">
                         Dashboard
